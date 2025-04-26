@@ -6,7 +6,7 @@
 
 这种解决方案就是使用浏览器缓存，但这种情况也存在一个弊端，即如何保证数据是最新的，当前我个人的解决方案是用户每次进入网站或每次刷新的时候都对数据进行请求，然后优先使用本地缓存，等数据请求完成后再进行替换。这种方案其实有很大的漏洞：
 
-1、`SPA` ( 单页面网站 ) 在第一次加载的时候速度会很慢；
+1、`SPA` ( 单页面应用网站 ) 在第一次加载的时候速度会很慢；
 
 2、用户每次刷新都对数据进行全量请求，流量消耗是比较大的；
 
@@ -14,11 +14,11 @@
 
 以上介绍皆为个人项目感受，以下是个人想到的解决方案：( 第一个问题并未解决 )
 
-#### 前言：
+#### 前言
 
 这是一个纯前端优化请求的想法，当然这不是最好的，最好的办法应该是用 `node` 搭个服务器，但对我而言时间成本有点高，所以想了这么一个实现方案。该方案最核心的点就是通过 `webpack` 打包生成的 `hash` 值来判断数据是否有更新，只请求更新过的数据，没有更新的数据就使用本地缓存。
 
-#### 依赖：
+#### 依赖
 
 需要使用 `node` 和 `webpack` 的依赖,直接复制粘贴就好了
 
@@ -28,12 +28,12 @@ yarn: yarn add -D webpack webpack-cli clean-webpack-plugin html-webpack-plugin
 npm: npm i -D webpack webpack-cli clean-webpack-plugin html-webpack-plugin
 ```
 
-#### 运行文件：
+#### 运行文件
 
 我用的 `yarn`，你可以根据自己的习惯执行命令
 
 ```
-运行使用：yarn dev 
+运行使用：yarn dev
 打包使用：yarn build
 生成数据中间层：yarn fileWrite
 
@@ -50,5 +50,4 @@ npm: npm i -D webpack webpack-cli clean-webpack-plugin html-webpack-plugin
 
 当前使用的是 `localStorage` 进行数据存储，存储最大值为 `5MB`，但当前使用的数据中有一个已经超出最大范围了，所以是存储不了的，也正好作为请求优化中无法被缓存的数据重复请求的示例，如果想要使用更大的本地缓存空间可以试试 `indexDB` 。需要注意的是 `indexDB` 的数据是异步获取的，使用 `Promise` ，而 `localStorage` 是同步获取数据。
 
-目前是针对： [世界online属性计算Utils](http://www.worldonlinetools.top/#/windows-home)  纯前端项目的数据请求方案，这个项目目前并不是开源的，因为技术太差，所以目前并无开源打算；项目中的数据就是纯前端所使用的数据 ( 不过有些已经废弃，但只是作为示例的话我觉得问题不大 ) 数据文件地址：https://github.com/treefuture/World-Online.git。
-
+目前是针对： [世界 online 属性计算 Utils](http://www.worldonlinetools.top/#/windows-home) 纯前端项目的数据请求方案，这个项目目前并不是开源的，因为技术太差，所以目前并无开源打算；项目中的数据就是纯前端所使用的数据 ( 不过有些已经废弃，但只是作为示例的话我觉得问题不大 ) 数据文件地址：<https://github.com/treefuture/World-Online.git>
