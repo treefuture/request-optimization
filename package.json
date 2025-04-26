@@ -1,0 +1,18 @@
+{
+  "name": "DataCachingMiddleware",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "scripts": {
+    "dev": "webpack --mode development --watch",
+    "fileWrite": "node utils/writeFile.js",
+    "build": "webpack --mode production"
+  },
+  "devDependencies": {
+    "clean-webpack-plugin": "^4.0.0",
+    "compression-webpack-plugin": "^11.1.0",
+    "html-webpack-plugin": "^5.6.3",
+    "webpack": "^5.99.6",
+    "webpack-cli": "^6.0.1"
+  }
+}
