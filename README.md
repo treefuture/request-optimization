@@ -37,7 +37,10 @@ npm: npm i -D webpack webpack-cli clean-webpack-plugin html-webpack-plugin
 打包使用：yarn build
 生成数据中间层：yarn fileWrite
 
-运行的时候执行 dist 目录下的 index.html
+已添加IndexDB的服务支持：
+
+运行的时候执行 dist 目录下的 index.html 使用的是 localStorage 本地储存
+运行的时候执行 indexDB 目录下的 index.html 使用的是 indexDB 数据库储存
 ```
 
 `dev` 是开发环境，会监听文件的变化。
@@ -48,6 +51,6 @@ npm: npm i -D webpack webpack-cli clean-webpack-plugin html-webpack-plugin
 
 请求优化就是通过对比 `data.json` 和本地缓存中的 `hash` 值来判断数据是否更新，如果不请求优化就是每次刷新页面的时候进行数据的全量加载。
 
-当前使用的是 `localStorage` 进行数据存储，存储最大值为 `5MB`，但当前使用的数据中有一个已经超出最大范围了，所以是存储不了的，也正好作为请求优化中无法被缓存的数据重复请求的示例，如果想要使用更大的本地缓存空间可以试试 `indexDB` 。需要注意的是 `indexDB` 的数据是异步获取的，使用 `Promise` ，而 `localStorage` 是同步获取数据。
+`dist` 目录下使用的是 `localStorage` 进行数据存储，存储最大值为 `5MB`，但当前使用的数据中有一个已经超出最大范围了，所以是存储不了的，也正好作为请求优化中无法被缓存的数据重复请求的示例，如果想要使用更大的本地缓存空间可以使用 `indexDB` 目录下的 `index.html` 使用的是 `indexDB` 进行数据存储。需要注意的是 `indexDB` 的数据是异步获取的，使用 `Promise` ，而 `localStorage` 是同步获取数据。
 
 目前是针对： [世界 online 属性计算 Utils](http://www.worldonlinetools.top/#/windows-home) 纯前端项目的数据请求方案，这个项目目前并不是开源的，因为技术太差，所以目前并无开源打算；项目中的数据就是纯前端所使用的数据 ( 不过有些已经废弃，但只是作为示例的话我觉得问题不大 ) 数据文件地址：<https://github.com/treefuture/World-Online.git>

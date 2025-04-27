@@ -58,8 +58,6 @@ function deepEqual(a, b, comparison = []) {
 
   // 用于比较的关键字(字符)
   if (!Array.isArray(comparison) && comparison) {
-    console.log(a[comparison])
-    console.log(b[comparison])
     return a[comparison] === b[comparison]
   }
 
