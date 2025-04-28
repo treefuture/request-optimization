@@ -3,6 +3,7 @@ const {
   CleanWebpackPlugin
 } = require("clean-webpack-plugin")
 const HtmlWebpackPlugin = require("html-webpack-plugin")
+const JsonMinimizerPlugin = require('json-minimizer-webpack-plugin');
 
 const {
   getFilesAndFoldersInDir
@@ -60,5 +61,11 @@ module.exports = {
       template: path.resolve(__dirname, 'public/index.html')
     }),
     new RunAfterBuildPlugin()
-  ]
+  ],
+  optimization: {
+    minimize: true,
+    minimizer: [
+      new JsonMinimizerPlugin(),
+    ],
+  },
 }
