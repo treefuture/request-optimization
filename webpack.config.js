@@ -27,11 +27,11 @@ class RunAfterBuildPlugin {
 }
 
 // 添加JSON文件过滤
-const entryList = getFilesAndFoldersInDir(path.resolve(__dirname, "src"))
+const entryList = getFilesAndFoldersInDir(path.resolve(__dirname, "src/data"))
   .filter(item => path.extname(item.name) === '.json')
   .reduce((entries, item) => {
     const name = path.basename(item.name, '.json');
-    entries[name] = path.resolve(__dirname, `src/${item.name}`);
+    entries[name] = path.resolve(__dirname, `src/data/${item.name}`);
     return entries;
   }, {});
 
