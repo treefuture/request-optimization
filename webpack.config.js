@@ -8,6 +8,23 @@ const {
   getFilesAndFoldersInDir
 } = require("./utils/readFile")
 
+// 自定义插件，在构建完成后执行脚本
+const {
+  exec
+} = require('child_process');
+
+class RunAfterBuildPlugin {
+  apply(compiler) {
+    compiler.hooks.done.tap('RunAfterBuild', () => {
+      exec('node utils/writeFile.js', (err, stdout, stderr) => {
+        if (err) console.error(err);
+        if (stdout) console.log(stdout);
+        if (stderr) console.error(stderr);
+      });
+    });
+  }
+}
+
 // 添加JSON文件过滤
 const entryList = getFilesAndFoldersInDir(path.resolve(__dirname, "src"))
   .filter(item => path.extname(item.name) === '.json')
@@ -41,6 +58,7 @@ module.exports = {
       },
       scriptLoading: 'defer',
       template: path.resolve(__dirname, 'public/index.html')
-    })
+    }),
+    new RunAfterBuildPlugin()
   ]
 }

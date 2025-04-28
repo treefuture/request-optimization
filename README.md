@@ -41,15 +41,17 @@ npm: npm i -D webpack webpack-cli clean-webpack-plugin html-webpack-plugin
 
 运行的时候执行 dist 目录下的 index.html 使用的是 localStorage 本地储存
 运行的时候执行 indexDB 目录下的 index.html 使用的是 indexDB 数据库储存
+
+后面我默认使用 yarn 执行命令，如果是使用 npm 包就将 'yarn xxx' 换成 'npm run xxx' 就行了
 ```
 
 `dev` 是开发环境，会监听文件的变化。
 
 `build` 是生产环境，默认会压缩文件，但这是 `json` 文件，不会压缩，一般就用开发环境就好了，文件更改后会自动监听，`build` 是为了以后可能有其他配置。
 
-文件改动之后需要使用 `yarn fileWrite` 重新生成一下 `data.json` 文件。`data.json` 文件会读取打包出来的 `json` 文件信息。进入页面的时候会自动调用初始化函数进行数据请求。
+文件改动之后需要使用 `yarn fileWrite` 重新生成一下 `data.json` 文件。`data.json` 文件会读取打包出来的 `json` 文件信息==>我们重新给 `webpack` 添加了一个插件，现在每次重新构建都会自动执行 `yarn fileWrite` 所以无论是使用 `yarn dev` 还是使用 `yarn build` 都会自动生成 `data.json` 文件信息了。
 
-请求优化就是通过对比 `data.json` 和本地缓存中的 `hash` 值来判断数据是否更新，如果不请求优化就是每次刷新页面的时候进行数据的全量加载。
+进入页面的时候会自动调用初始化函数进行数据请求，请求优化就是通过对比 `data.json` 和本地缓存中的 `hash` 值来判断数据是否更新，如果不请求优化就是每次刷新页面的时候进行数据的全量加载。
 
 `dist` 目录下使用的是 `localStorage` 进行数据存储，存储最大值为 `5MB`，但当前使用的数据中有一个已经超出最大范围了，所以是存储不了的，也正好作为请求优化中无法被缓存的数据重复请求的示例，如果想要使用更大的本地缓存空间可以使用 `indexDB` 目录下的 `index.html` 使用的是 `indexDB` 进行数据存储。需要注意的是 `indexDB` 的数据是异步获取的，使用 `Promise` ，而 `localStorage` 是同步获取数据。
 
