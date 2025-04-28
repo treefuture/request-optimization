@@ -2,8 +2,14 @@ import {
   compareArrayObjects
 } from '../utils/fileDifference.js'
 import {
+  localDataMapping
+} from "../utils/localDataMapping.js"
+import {
   dataRequest
 } from "../rq/dataRequest.js"
+import {
+  LOCAL_MAPPING
+} from "../src/constantPool.js"
 
 // 获取打包后的数据
 const data = await (await fetch("/dist/data.json")).json()
@@ -15,15 +21,20 @@ const getData = (cache) => {
   }
 
   if (JSON.parse(sessionStorage.getItem('cache'))) {
-    const dataComparison = []
-
-    data.forEach(item => {
-      const key = JSON.parse(localStorage.getItem(item.fileName))
-      dataComparison.push({
-        fileName: key?.fileName,
-        hash: key?.hash
+    const dataComparison = JSON.parse(sessionStorage.getItem(LOCAL_MAPPING)) ?? []
+    if (!dataComparison.length) {
+      data.forEach(item => {
+        const key = JSON.parse(localStorage.getItem(item.fileName))
+        if (key) {
+          dataComparison.push({
+            fileName: key?.fileName,
+            hash: key?.hash
+          })
+        }
       })
-    })
+      // 创建存储本地数据映射
+      localDataMapping(LOCAL_MAPPING, dataComparison)
+    }
 
     const {
       added,
