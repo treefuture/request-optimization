@@ -25,7 +25,7 @@ export const compareArrayObjects = (arr1, arr2, key = 'id', comparison = []) => 
 
   // 检查删除的对象
   for (const [id, item] of map1) {
-    if (!map2.has(id) && item) {
+    if (!map2.has(id) && !!Object.keys(item).length) {
       differences.removed.push(item);
     }
   }
