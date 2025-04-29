@@ -4,16 +4,20 @@
   "main": "index.js",
   "license": "MIT",
   "scripts": {
-    "dev": "webpack --mode development --watch",
+    "dev": "webpack --mode development --watch --config-name run",
+    "serve": "webpack serve --mode development --open --config-name server",
     "fileWrite": "node utils/writeFile.js",
-    "build": "webpack --mode production"
+    "build": "webpack --mode production --config-name run&& yarn pack:dist",
+    "pack:dist": "webpack --mode production --config webpackConstruct/webpack.config.js"
   },
   "devDependencies": {
     "clean-webpack-plugin": "^4.0.0",
     "compression-webpack-plugin": "^11.1.0",
+    "copy-webpack-plugin": "^13.0.0",
     "html-webpack-plugin": "^5.6.3",
     "json-minimizer-webpack-plugin": "^5.0.1",
-    "webpack": "^5.99.6",
-    "webpack-cli": "^6.0.1"
+    "webpack": "^5.99.7",
+    "webpack-cli": "^6.0.1",
+    "webpack-dev-server": "^5.2.1"
   }
 }

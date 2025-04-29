@@ -12,7 +12,7 @@ import {
 } from "../src/constantPool.js"
 
 // 获取打包后的数据
-const data = await (await fetch("/dist/data.json")).json()
+const data = await (await fetch("/release/data.json")).json()
 
 // 数据请求
 const getData = (cache) => {
@@ -44,7 +44,7 @@ const getData = (cache) => {
 
     // 新增的数据
     added.forEach(item => {
-      dataRequest(`/dist/${item.name}`, item)
+      dataRequest(`/release/${item.name}`, item)
     })
     // 更改的数据
     modified.forEach(item => {
@@ -53,7 +53,7 @@ const getData = (cache) => {
         fileName: item.newValue.fileName,
         hash: item.newValue.hash
       })
-      dataRequest(`/dist/${modifiedData.name}`, modifiedData)
+      dataRequest(`/release/${modifiedData.name}`, modifiedData)
     })
     // 删除的数据
     removed.forEach(item => {
@@ -61,7 +61,7 @@ const getData = (cache) => {
     })
   } else {
     data.forEach(item => {
-      dataRequest(`/dist/${item.name}`, item)
+      dataRequest(`/release/${item.name}`, item)
     });
   }
 }

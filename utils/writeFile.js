@@ -4,7 +4,7 @@ const {
   getFilesAndFoldersInDir
 } = require("./readFile")
 
-const list = getFilesAndFoldersInDir(path.resolve(__dirname, '..', "dist"));
+const list = getFilesAndFoldersInDir(path.resolve(__dirname, '..', "release"));
 
 // 过滤掉除JSON外的其他文件，并进行一些初始化操作
 const jsonFile = list
@@ -18,7 +18,7 @@ const jsonFile = list
   })
 
 // 异步写入文件
-fs.writeFile(path.resolve(__dirname, '..', 'dist/data.json'), JSON.stringify(jsonFile), (err) => {
+fs.writeFile(path.resolve(__dirname, '../release/data.json'), JSON.stringify(jsonFile), (err) => {
   if (err) throw err;
   console.log('数据写入已完成');
 });
