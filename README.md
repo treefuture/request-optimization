@@ -21,6 +21,8 @@ npm: npm i -D webpack webpack-cli clean-webpack-plugin html-webpack-plugin copy-
 ```
 目前不支持热更新，dev-server 文件引入路径有问题目前还没有研究明白...
 
+目前dist目录下的文件需要上传到服务器运行，本地运行请使用indexDB文件夹下的index.html
+
 运行使用：yarn dev
 打包使用：yarn build ==> 打包的时候会自动进行二段构建，直接运行 release 中的 index.html 就好了(release 是二段打包的出口)
 生成数据中间层：yarn fileWrite
