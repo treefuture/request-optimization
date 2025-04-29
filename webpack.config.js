@@ -35,6 +35,8 @@ const entryList = getFilesAndFoldersInDir(path.resolve(__dirname, "src/data"))
     return entries;
   }, {});
 
+entryList.index = path.resolve(__dirname, "src/index.js")
+
 module.exports = {
   entry: entryList,
   output: {

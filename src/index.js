@@ -9,7 +9,7 @@ import {
 } from "../rq/dataRequest.js"
 import {
   LOCAL_MAPPING
-} from "../src/constantPool.js"
+} from "./constantPool.js"
 
 // 获取打包后的数据
 const data = await (await fetch("/dist/data.json")).json()
