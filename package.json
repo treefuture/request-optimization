@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "webpack --mode development --watch --config-name run",
     "serve": "webpack serve --mode development --open --config-name server",
-    "fileWrite": "node utils/writeFile.js",
+    "fileWrite": "node src/mappingFileGeneration.js",
     "build": "webpack --mode production --config-name run&& yarn pack:dist",
     "pack:dist": "webpack --mode production --config webpackConstruct/webpack.config.js"
   },
