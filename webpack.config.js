@@ -17,7 +17,7 @@ const {
 class RunAfterBuildPlugin {
   apply(compiler) {
     compiler.hooks.done.tap('RunAfterBuild', () => {
-      exec('node utils/writeFile.js', (err, stdout, stderr) => {
+      exec('node src/mappingFileGeneration.js', (err, stdout, stderr) => {
         if (err) console.error(err);
         if (stdout) console.log(stdout);
         if (stderr) console.error(stderr);

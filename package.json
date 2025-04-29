@@ -5,7 +5,7 @@
   "license": "MIT",
   "scripts": {
     "dev": "webpack --mode development --watch",
-    "fileWrite": "node utils/writeFile.js",
+    "fileWrite": "node src/mappingFileGeneration.js",
     "build": "webpack --mode production"
   },
   "devDependencies": {
