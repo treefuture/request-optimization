@@ -23,7 +23,7 @@ import {
 } from "./indexDB.js"
 
 // 获取更新的数据索引
-const data = await (await fetch("/release/data.json")).json()
+const data = await (await fetch("/data.json")).json()
 // 打开数据库并获取数据库实例
 const DB_EXAMPLE = await openDB(DB_NAME, DB_STORE_NAME, 'fileName')
 // 获取本地数据库中的数据
@@ -56,7 +56,7 @@ const fetchList = []
 
 // 新增的数据
 added.forEach(item => {
-  fetchList.push([fetch(`/release/${item.name}`), (value) => {
+  fetchList.push([fetch(`/${item.name}`), (value) => {
     console.log(`正在添加${item.fileName}到缓存中`)
     addData(DB_EXAMPLE, DB_STORE_NAME, Object.assign(value, {
       fileName: item.fileName,
@@ -68,7 +68,7 @@ added.forEach(item => {
 })
 // 更改的数据
 modified.forEach(item => {
-  fetchList.push([fetch(`/release/${item.newValue.name}`), (value) => {
+  fetchList.push([fetch(`/${item.newValue.name}`), (value) => {
     const modifiedData = Object.assign(value, {
       fileName: item.newValue.fileName,
       hash: item.newValue.hash

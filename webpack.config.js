@@ -5,22 +5,9 @@ const {
 const HtmlWebpackPlugin = require("html-webpack-plugin")
 const CopyPlugin = require('copy-webpack-plugin');
 
-const {
-  getFilesAndFoldersInDir
-} = require("./utils/readFile")
-
-// 添加js文件过滤
-const entryList = getFilesAndFoldersInDir(path.resolve(__dirname, "src"), false)
-  .filter(item => path.basename(item.name, '.js') !== 'constantPool')
-  .reduce((entries, item) => {
-    const name = path.basename(item.name, '.js');
-    entries[name] = path.resolve(__dirname, `src/${item.name}`);
-    return entries;
-  }, {});
-
 module.exports = [{
   name: "run",
-  entry: entryList,
+  entry: path.resolve(__dirname, 'src/index.js'),
   output: {
     filename: "[name].[contenthash:5].js",
     path: path.resolve(__dirname, "dist")
@@ -47,7 +34,7 @@ module.exports = [{
   ],
 }, {
   name: "server",
-  entry: path.resolve(__dirname, "public"),
+  entry: path.resolve(__dirname, "src/index.js"),
   output: {
     filename: "[name].[contenthash:5].js",
     path: path.resolve(__dirname, "dist")
@@ -67,6 +54,6 @@ module.exports = [{
       },
       scriptLoading: 'defer',
       template: path.resolve(__dirname, 'public/index.html')
-    }),
+    })
   ],
 }]
