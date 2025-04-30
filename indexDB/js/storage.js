@@ -30,9 +30,9 @@ const DB_EXAMPLE = await openDB(DB_NAME, DB_STORE_NAME, 'fileName')
 let dataComparison = JSON.parse(sessionStorage.getItem(LOCAL_MAPPING)) ?? []
 if (!dataComparison.length) {
   dataComparison = await cursorGetData(DB_EXAMPLE, DB_STORE_NAME)
-  // 创建存储本地数据映射
-  localDataMapping(LOCAL_MAPPING, dataComparison)
 }
+// 创建存储本地数据映射
+localDataMapping(LOCAL_MAPPING, dataComparison)
 
 // console.log("本地数据")
 // console.log(dataComparison)

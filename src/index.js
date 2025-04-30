@@ -32,6 +32,8 @@ const getData = (cache) => {
           })
         }
       })
+      // 创建存储本地数据映射
+      localDataMapping(LOCAL_MAPPING, dataComparison)
     }
 
     const {
