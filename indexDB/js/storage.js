@@ -31,6 +31,8 @@ let dataComparison = JSON.parse(sessionStorage.getItem(LOCAL_MAPPING)) ?? []
 if (!dataComparison.length) {
   dataComparison = await cursorGetData(DB_EXAMPLE, DB_STORE_NAME)
 }
+// 创建存储本地数据映射
+localDataMapping(LOCAL_MAPPING, dataComparison)
 
 // console.log("本地数据")
 // console.log(dataComparison)
