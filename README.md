@@ -25,7 +25,8 @@ npm i pako
 ```
 目前不支持热更新，dev-server 文件引入路径有问题目前还没有研究明白...==>问题已修复
 
-目前dist目录下的文件需要上传到服务器运行，本地运行请使用indexDB文件夹下的index.html
+目前dist/release目录下的文件需要上传到服务器运行，本地运行请使用indexDB文件夹下的index.html
+如果一定要在本地运行dist/release目录下的文件请在src目录下idnex.js中的请求前加上相应的根目录 `fetch("/xxx/xxx.json")` `dataRequest(`/xxx/${xxx}`, xxx)` 然后重新打包
 
 运行使用：yarn dev
 打包使用：yarn build ==> 打包的时候会自动进行二段构建，直接运行 release 中的 index.html 就好了(release 是二段打包的出口)
