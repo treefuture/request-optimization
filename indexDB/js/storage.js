@@ -21,6 +21,9 @@ import {
   cursorGetData,
   deleteDB,
 } from "./indexDB.js"
+import {
+  dataFetch
+} from '../../utils/dataFetch.js'
 
 // 获取更新的数据索引
 const data = await (await fetch("/release/data.json")).json()
@@ -56,20 +59,20 @@ const fetchList = []
 
 // 新增的数据
 added.forEach(item => {
-  fetchList.push([fetch(`/release/${item.name}`), (value) => {
+  fetchList.push([fetch(`/release/${item.name}`), async (value) => {
     console.log(`正在添加${item.fileName}到缓存中`)
-    addData(DB_EXAMPLE, DB_STORE_NAME, Object.assign(value, {
+    addData(DB_EXAMPLE, DB_STORE_NAME, Object.assign(await dataFetch(value), {
       fileName: item.fileName,
       hash: item.hash
     }))
-    // 更新存储本地数据映射
+    // // 更新存储本地数据映射
     localDataMapping(LOCAL_MAPPING, item)
   }])
 })
 // 更改的数据
 modified.forEach(item => {
-  fetchList.push([fetch(`/release/${item.newValue.name}`), (value) => {
-    const modifiedData = Object.assign(value, {
+  fetchList.push([fetch(`/release/${item.newValue.name}`), async (value) => {
+    const modifiedData = Object.assign(await dataFetch(value), {
       fileName: item.newValue.fileName,
       hash: item.newValue.hash
     })

@@ -4,6 +4,7 @@ const {
 } = require("clean-webpack-plugin")
 const JsonMinimizerPlugin = require('json-minimizer-webpack-plugin');
 const CopyPlugin = require('copy-webpack-plugin');
+const CompressionPlugin = require("compression-webpack-plugin");
 
 const {
   getFilesAndFoldersInDir
@@ -61,6 +62,14 @@ module.exports = {
           ignore: ['**/*.json'], // 忽略所有 JSON 文件
         },
       }],
+    }),
+    new CompressionPlugin({
+      test: /\.json$/i,
+      filename: "[path][base].gz", // 保持原路径结构
+      algorithm: "gzip",
+      threshold: 0, // 所有文件都压缩
+      minRatio: 0.8, // 压缩率低于 0.8 才生成
+      deleteOriginalAssets: true // 不保留原始文件
     }),
   ],
   optimization: {

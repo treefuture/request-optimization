@@ -9,9 +9,13 @@
 需要使用 `node` 和 `webpack` 的依赖,直接复制粘贴就好了
 
 ```
-yarn: yarn add -D webpack webpack-cli clean-webpack-plugin html-webpack-plugin copy-webpack-plugin webpack-dev-server
+yarn: 
+yarn add -D webpack webpack-cli clean-webpack-plugin html-webpack-plugin copy-webpack-plugin webpack-dev-server compression-webpack-plugin
+yarn add pako
 或者
-npm: npm i -D webpack webpack-cli clean-webpack-plugin html-webpack-plugin copy-webpack-plugin webpack-dev-server
+npm: 
+npm i -D webpack webpack-cli clean-webpack-plugin html-webpack-plugin copy-webpack-plugin webpack-dev-server compression-webpack-plugin
+npm i pako
 ```
 
 #### 运行文件
