@@ -47,6 +47,7 @@ npm i pako
 运行的时候执行 indexDB 目录下的 index.html 使用的是 indexDB 数据库储存
 
 目前dist目录下的文件需要上传到服务器运行，本地运行请使用indexDB文件夹下的index.html
+如果一定要在本地运行dist目录下的文件请在src目录下idnex.js中的请求前加上相应的根目录 `fetch("/xxx/xxx.json")` `dataRequest(`/xxx/${xxx}`, xxx)` 然后重新打包
 
 后面我默认使用 yarn 执行命令，如果是使用 npm 包就将 'yarn xxx' 换成 'npm run xxx' 就行了
 ```
