@@ -19,7 +19,7 @@ npm: npm i -D webpack webpack-cli clean-webpack-plugin html-webpack-plugin copy-
 我用的 `yarn`，你可以根据自己的习惯执行命令
 
 ```
-目前不支持热更新，dev-server 文件引入路径有问题目前还没有研究明白...
+目前不支持热更新，dev-server 文件引入路径有问题目前还没有研究明白...==>问题已修复
 
 目前dist目录下的文件需要上传到服务器运行，本地运行请使用indexDB文件夹下的index.html
 
