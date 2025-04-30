@@ -6,12 +6,30 @@ import {
 } from "../src/constantPool.js"
 
 export const dataRequest = async (url, item) => {
-  const cacheName = await (await fetch(url)).json()
-  cacheName.fileName = item.fileName
-  cacheName.hash = item.hash
   console.log(`正在请求：${cacheName.fileName}`)
+  const cache = fetch(url)
+  const suffix = cache.url.split(".").at(-1)
+  const cacheData = {
+    fileName: item.fileName,
+    hash: item.hash
+  }
+
+  switch (suffix) {
+    case 'json':
+      cacheData = Object.assign(cacheData, await cache.json())
+      break;
+    case 'gz':
+      const data = await cache.arrayBuffer()
+      cacheData = Object.assign(cacheData, JSON.parse(inflate(new Uint8Array(data), {
+        to: 'string'
+      })))
+      break;
+    default:
+      throw new Error("数据类型错误")
+  }
+
   try {
-    localStorage.setItem(cacheName.fileName, JSON.stringify(cacheName))
+    localStorage.setItem(cacheName.fileName, JSON.stringify(cacheData))
     // 更新存储本地数据映射
     localDataMapping(LOCAL_MAPPING, item)
   } catch (error) {

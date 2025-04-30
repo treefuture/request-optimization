@@ -21,16 +21,14 @@ export const promiseAll = (promiseArr, callback) => {
     const taskValue = []
     for (let i = 0, len = promiseArr.length; i < len; i++) {
       const [promise, taskCallback] = promiseArr[i]
-      superTask.add(promise).then(async value => {
-        // fetch请求时返回的是请求头信息，需要自己读取
-        const data = await (await value).json()
-        if (data) {
+      superTask.add(promise).then(value => {
+        if (value) {
           count++
           // 存储每个成功请求的返回值
-          taskValue[i] = data
+          taskValue[i] = value
           // 请求完成的回调函数
-          callback && callback(data)
-          taskCallback && taskCallback(data)
+          callback && callback(value)
+          taskCallback && taskCallback(value)
         }
 
         if (count === len) {

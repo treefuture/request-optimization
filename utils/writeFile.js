@@ -9,7 +9,7 @@ function writeFile(entry, output) {
 
   // 过滤掉除JSON外的其他文件，并进行一些初始化操作
   const jsonFile = list
-    .filter(item => path.extname(item.name) === '.json' && item.name !== "data.json")
+    .filter(item => (path.extname(item.name) === '.json' || path.extname(item.name) === '.gz') && item.name !== "data.json")
     .map(item => {
       const name = item.name.split(".")
       item.fileName = name[0]
