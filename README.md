@@ -23,9 +23,9 @@
 需要使用 `node` 和 `webpack` 的依赖,直接复制粘贴就好了
 
 ```
-yarn: yarn add -D webpack webpack-cli clean-webpack-plugin html-webpack-plugin
+yarn: yarn add -D webpack webpack-cli clean-webpack-plugin html-webpack-plugin json-minimizer-webpack-plugin compression-webpack-plugin
 或者
-npm: npm i -D webpack webpack-cli clean-webpack-plugin html-webpack-plugin
+npm: npm i -D webpack webpack-cli clean-webpack-plugin html-webpack-plugin json-minimizer-webpack-plugin compression-webpack-plugin
 ```
 
 #### 运行文件
