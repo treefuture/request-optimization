@@ -40,9 +40,15 @@ module.exports = [{
     path: path.resolve(__dirname, "dist")
   },
   devServer: {
-    static: {
-      directory: path.join(__dirname, 'dist'),
-    },
+    static: [{
+        directory: path.resolve(__dirname, 'dist'), // 默认输出目录
+        publicPath: '/',
+      },
+      {
+        directory: path.resolve(__dirname, 'release'), // 新增的静态目录
+        publicPath: '/', // 浏览器访问路径前缀
+      }
+    ],
     compress: true,
     port: 9000,
   },
