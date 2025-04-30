@@ -4,10 +4,13 @@ import {
 import {
   LOCAL_MAPPING
 } from "../src/constantPool.js"
+import {
+  inflate
+} from 'pako'
 
 export const dataRequest = async (url, item) => {
-  console.log(`正在请求：${cacheName.fileName}`)
-  const cache = fetch(url)
+  console.log(`正在请求：${item.fileName}`)
+  const cache = await fetch(url)
   const suffix = cache.url.split(".").at(-1)
   const cacheData = {
     fileName: item.fileName,
@@ -16,11 +19,11 @@ export const dataRequest = async (url, item) => {
 
   switch (suffix) {
     case 'json':
-      cacheData = Object.assign(cacheData, await cache.json())
+      Object.assign(cacheData, await cache.json())
       break;
     case 'gz':
       const data = await cache.arrayBuffer()
-      cacheData = Object.assign(cacheData, JSON.parse(inflate(new Uint8Array(data), {
+      Object.assign(cacheData, JSON.parse(inflate(new Uint8Array(data), {
         to: 'string'
       })))
       break;
@@ -29,13 +32,13 @@ export const dataRequest = async (url, item) => {
   }
 
   try {
-    localStorage.setItem(cacheName.fileName, JSON.stringify(cacheData))
+    localStorage.setItem(cacheData.fileName, JSON.stringify(cacheData))
     // 更新存储本地数据映射
     localDataMapping(LOCAL_MAPPING, item)
   } catch (error) {
     const textContent = error.toString().match(/'([^']*)'/g)
     const p = document.createElement("p")
-    p.textContent = textContent[2] + "储存失败"
+    p.textContent = textContent.at(-1) + "储存失败"
 
     document.body.appendChild(p)
     setTimeout(() => {
