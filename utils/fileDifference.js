@@ -1,7 +1,7 @@
 /**
  * 比较两个数组之间的差异
- * @param {第一个数组} arr1 
- * @param {第二个数组} arr2 
+ * @param {旧数据数组} arr1 
+ * @param {新数据数组} arr2 
  * @param {参照物} key 
  * @param {需要进行比较的数据} comparison 
  * @returns 
